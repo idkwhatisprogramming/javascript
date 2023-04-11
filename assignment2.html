@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="app-header">
+            <h1>Document</h1>
+            <ul id="element-id">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+        </div>
+        <script>
+
+            //Question 1
+            function addNumberClosure(numAdd){
+                return function(num){
+                    return num + numAdd;
+                }
+            }
+
+            const addNum = addNumberClosure(5);
+            console.log(addNum(5));
+            console.log(addNum(15));
+
+
+
+            //Question 2
+            function searchArray(arr, value) {
+                if (arr.length === 0) {
+                    return false;
+                }
+                if (arr[0] === value) {
+                    return true;
+                }
+                else {
+                    return searchArray(arr.slice(1), value);
+                }
+            }
+
+            const arr = [1, 2, 3, 4, 5];
+            console.log(searchArray(arr, 3));
+            console.log(searchArray(arr, 6));
+
+
+
+            // Question 3
+            function addParagraph(paragraph) {
+                let p = document.createElement("p");
+                p.textContent = paragraph;
+
+                let body = document.body;
+                body.appendChild(p);
+            }
+
+            addParagraph("Hello! I am learning JS from SMIT");
+
+
+
+            // Question 4
+            function addItem(itemList) {
+                let ul = document.querySelector('ul');
+                let li = document.createElement('li');
+                li.textContent = itemList;
+                ul.appendChild(li);
+            }
+
+            addItem("Hello Programmer!");
+
+
+
+            // Question 5
+            function changeColor(element, bgcolor){
+                element.style.backgroundColor = bgcolor;
+            }
+
+            changeColor(document.getElementById("element-id"), "blue");
+
+
+
+            // Question 6
+            function saveLocalStorage(key, object) {
+                localStorage.setItem(key, JSON.stringify(object));
+            }
+
+            const object = {
+                name: "Ali",
+                age: 30,
+                occupation: "Software Engineer"
+            };
+
+            saveLocalStorage("userInfo", object);
+
+            const userInfoStorage = JSON.parse(localStorage.getItem("userInfo"));
+            console.log(userInfoStorage);
+
+
+
+
+            // Question 7
+            function getFromLocalStorage(key) {
+                return JSON.parse(localStorage.getItem(key));
+            }
+
+            const userInfoFromStorage = getFromLocalStorage("userInfo");
+            console.log(userInfoFromStorage);
+
+            // Question 8
+            function saveAndRetrieveObjectToLocalStorage(obj) {
+                try {
+                    const keys = Object.keys(obj);
+                    const values = keys.map(key => JSON.parse(localStorage.getItem(key)));
+                    const result = Object.create(obj);
+                    keys.forEach(key => result[key] = values[key]);
+                    return result;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            const obj = {
+                name: "Moiz",
+                age: 20,
+                occupation: "Engineer"
+            };
+
+            const savedObject = saveAndRetrieveObjectToLocalStorage(obj);
+
+
+            console.log(savedObject);
+
+        </script>
+</body>
+
+</html>
